@@ -8,7 +8,7 @@ public class Room {
     private String name;
     private List<Sensor> sensors = new ArrayList<>();
 
-    // Constructor, Getters සහ Setters අවශ්‍යයි
+    // need constructur and Getter, Setters
     public Room() {}
     public Room(String id, String name) {
         this.id = id;
