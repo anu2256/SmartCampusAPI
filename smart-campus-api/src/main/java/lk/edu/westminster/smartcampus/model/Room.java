@@ -1,8 +1,5 @@
 package lk.edu.westminster.smartcampus.model;
 
-public class Room {
-    package lk.edu.westminster.smartcampus.model;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,5 +21,4 @@ public class Room {
     public void setName(String name) { this.name = name; }
     public List<Sensor> getSensors() { return sensors; }
     public void setSensors(List<Sensor> sensors) { this.sensors = sensors; }
-}
 }

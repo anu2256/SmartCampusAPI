@@ -1,8 +1,5 @@
 package lk.edu.westminster.smartcampus.model;
 
-public class Sensor {
-    package lk.edu.westminster.smartcampus.model;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,5 +14,4 @@ public class Sensor {
     public String getType() { return type; }
     public void setType(String type) { this.type = type; }
     public List<Reading> getReadings() { return readings; }
-}
 }
