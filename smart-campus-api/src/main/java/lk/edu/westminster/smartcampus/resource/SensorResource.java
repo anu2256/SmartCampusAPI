@@ -20,7 +20,7 @@ public class SensorResource {
 
     @GET
     public List<Sensor> getAllSensors() {
-        // Singleton එකෙන් දත්ත ගන්න විදිය
+        // Singleton 
         return DataStore.getInstance().getSensors();
     }
 

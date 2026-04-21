@@ -8,6 +8,12 @@ package lk.edu.westminster.smartcampus;
  *
  * @author USER
  */
-public class MainApplication {
-    
+
+
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
+
+@ApplicationPath("/api/v1") // ඔයාගේ URL එකේ මුල මෙතනින් හැදෙනවා
+public class MainApplication extends Application {
+    // මේක දාපුවාම Jersey එක ඔටෝම ඔයාගේ Resource classes හොයාගන්නවා
 }
