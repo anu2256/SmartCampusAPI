@@ -4,17 +4,16 @@
  */
 package lk.edu.westminster.smartcampus.model;
 
-/**
- *
- * @author USER
- */
 public class SensorReading {
     private String id;
     private String sensorId; // කුමන sensor එකෙන්ද මේ දත්ත ආවේ?
     private double value;    // අගය (Value)
     private long timestamp;  // දත්ත ලැබුණු වෙලාව
 
-    // Constructor
+    // JAX-RS සඳහා අත්‍යවශ්‍ය හිස් Constructor එක
+    public SensorReading() {}
+
+    // පරාමිති සහිත Constructor එක
     public SensorReading(String id, String sensorId, double value, long timestamp) {
         this.id = id;
         this.sensorId = sensorId;
@@ -22,14 +21,16 @@ public class SensorReading {
         this.timestamp = timestamp;
     }
 
-    // Getters සහ Setters අනිවාර්යයෙන්ම දාන්න
+    // Getters සහ Setters
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
+
     public String getSensorId() { return sensorId; }
     public void setSensorId(String sensorId) { this.sensorId = sensorId; }
+
     public double getValue() { return value; }
     public void setValue(double value) { this.value = value; }
+
     public long getTimestamp() { return timestamp; }
     public void setTimestamp(long timestamp) { this.timestamp = timestamp; }
 }
-
