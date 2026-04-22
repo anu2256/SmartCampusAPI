@@ -6,14 +6,14 @@ import java.util.List;
 public class Sensor {
     private String id;
     private String type; 
-    private String roomId; // අලුතින් එක් කළා (Lab 01 තැන්පත් කිරීමට)
+    private String roomId;
+    private double currentValue; // අලුතින් එකතු කළා
     private List<SensorReading> sensorReadings = new ArrayList<>();
 
     public Sensor() {}
 
-    // නව Constructor එක (int, String, String) පරාමිතීන් සඳහා
     public Sensor(int id, String type, String roomId) {
-        this.id = String.valueOf(id); // int එක String බවට පත් කිරීම
+        this.id = String.valueOf(id);
         this.type = type;
         this.roomId = roomId;
     }
@@ -27,6 +27,10 @@ public class Sensor {
     
     public String getRoomId() { return roomId; }
     public void setRoomId(String roomId) { this.roomId = roomId; }
+
+    // currentValue සඳහා getter සහ setter
+    public double getCurrentValue() { return currentValue; }
+    public void setCurrentValue(double currentValue) { this.currentValue = currentValue; }
     
     public List<SensorReading> getReadings() { return sensorReadings; }
     public void setReadings(List<SensorReading> sensorReadings) { this.sensorReadings = sensorReadings; }
