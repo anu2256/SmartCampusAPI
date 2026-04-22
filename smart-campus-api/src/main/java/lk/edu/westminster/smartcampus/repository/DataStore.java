@@ -15,8 +15,8 @@ public class DataStore {
     // Private constructor: මෙතැනදී දත්ත මුලින්ම පිරවීම (Initialize) සිදු කරයි
     private DataStore() {
         // Rooms පිරවීම
-        rooms.add(new Room(1, "Lab 01", "Floor 1"));
-        rooms.add(new Room(2, "Lecture Hall A", "Floor 2"));
+        rooms.add(new Room("1", "Lab 01", 30, "Floor 1"));
+        rooms.add(new Room("2", "Lecture Hall A", 50, "Floor 2"));
 
         // Sensors පිරවීම (අවශ්‍ය නම් දත්ත එක් කරන්න)
         sensors.add(new Sensor(1, "Temperature Sensor", "Lab 01"));
