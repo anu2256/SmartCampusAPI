@@ -2,6 +2,7 @@ lk\edu\westminster\smartcampus\model\Room.class
 lk\edu\westminster\smartcampus\model\Sensor.class
 lk\edu\westminster\smartcampus\aa.class
 lk\edu\westminster\smartcampus\MainApplication.class
+lk\edu\westminster\smartcampus\resource\RoomResource.class
 lk\edu\westminster\ss.class
 lk\edu\westminster\smartcampus\repository\DataStore.class
 lk\edu\westminster\smartcampus\model\SensorReading.class
