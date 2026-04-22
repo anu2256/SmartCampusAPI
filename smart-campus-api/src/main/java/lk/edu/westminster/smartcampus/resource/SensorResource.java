@@ -7,10 +7,10 @@ package lk.edu.westminster.smartcampus.resource;
 import lk.edu.westminster.smartcampus.model.Sensor;
 import lk.edu.westminster.smartcampus.model.Room;
 import lk.edu.westminster.smartcampus.repository.DataStore;
+import lk.edu.westminster.smartcampus.exception.LinkedResourceNotFoundException; // මෙය අනිවාර්යයෙන්ම import කරන්න
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.WebApplicationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class SensorResource {
         return allSensors;
     }
 
-    // 2. POST - Room Validation සමඟ
+    // 2. POST - Room Validation සහ Exception Handling සමඟ
     @POST
     public Response addSensor(Sensor sensor) {
         Room room = null;
@@ -47,10 +47,10 @@ public class SensorResource {
             }
         }
 
+        // Room එක නැත්නම් අපි අපේ අලුත් Exception එක throw කරනවා
+        // මේකෙන් අර Mapper එක මගින් 422 JSON response එකක් යවනවා
         if (room == null) {
-            return Response.status(Response.Status.NOT_FOUND)
-                           .entity("Error: Room ID " + sensor.getRoomId() + " not found.")
-                           .build();
+            throw new LinkedResourceNotFoundException("Error: Room ID " + sensor.getRoomId() + " not found.");
         }
 
         DataStore.getInstance().getSensors().add(sensor);
@@ -67,11 +67,11 @@ public class SensorResource {
                 .anyMatch(s -> s.getId().equalsIgnoreCase(id));
 
         if (!exists) {
-            // Sensor එක නැත්නම් 404 Error එකක් දෙන්න
+            // මෙතැනදීත් ඔබට අවශ්‍ය නම් 404 සඳහා Custom Exception එකක් හදලා throw කරන්න පුළුවන්
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
 
-        // Sensor එක තියෙනවා නම්, එම ID එක සමඟ SensorReadingResource එකට යොමු කරන්න
         return new SensorReadingResource(id);
     }
 }
+
