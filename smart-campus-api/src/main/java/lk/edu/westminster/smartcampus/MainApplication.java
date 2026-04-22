@@ -4,7 +4,8 @@
  */
 package lk.edu.westminster.smartcampus;
 
-import lk.edu.westminster.smartcampus.resource.SensorResource; // ඔබේ SensorResource එක Import කරන්න
+import lk.edu.westminster.smartcampus.resource.RoomResource;
+import lk.edu.westminster.smartcampus.resource.SensorResource;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import java.util.HashSet;
@@ -16,10 +17,11 @@ public class MainApplication extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new HashSet<>();
-        // මෙතැනදී ඔබේ Resource පන්ති එකතු කරන්න
+        
+        // මෙහි ඔබේ සියලුම Resource පන්ති එකතු කරන්න
         resources.add(SensorResource.class); 
-        // ඔබට RoomResource එකක් තිබේ නම්, එයත් මෙසේ එක් කරන්න:
-        // resources.add(RoomResource.class); 
+        resources.add(RoomResource.class); 
+        
         return resources;
     }
 }
