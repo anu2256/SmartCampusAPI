@@ -10,6 +10,7 @@ import lk.edu.westminster.smartcampus.repository.DataStore;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.WebApplicationException;
 import java.util.ArrayList;
 import java.util.List;
 
