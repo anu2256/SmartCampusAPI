@@ -4,10 +4,8 @@
  */
 package lk.edu.westminster.smartcampus.exception;
 
-/**
- *
- * @author USER
- */
-public class SensorUnavailableException {
-    
+public class SensorUnavailableException extends RuntimeException {
+    public SensorUnavailableException(String message) {
+        super(message);
+    }
 }

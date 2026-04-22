@@ -7,8 +7,10 @@ C:\Users\USER\Desktop\SmartCampusAPI\smart-campus-api\src\main\java\lk\edu\westm
 C:\Users\USER\Desktop\SmartCampusAPI\smart-campus-api\src\main\java\lk\edu\westminster\smartcampus\aa.java
 C:\Users\USER\Desktop\SmartCampusAPI\smart-campus-api\src\main\java\lk\edu\westminster\smartcampus\exception\LinkedResourceNotFoundMapper.java
 C:\Users\USER\Desktop\SmartCampusAPI\smart-campus-api\src\main\java\lk\edu\westminster\smartcampus\resource\SensorResource.java
+C:\Users\USER\Desktop\SmartCampusAPI\smart-campus-api\src\main\java\lk\edu\westminster\smartcampus\exception\SensorUnavailableException.java
 C:\Users\USER\Desktop\SmartCampusAPI\smart-campus-api\src\main\java\lk\edu\westminster\smartcampus\model\SensorReading.java
 C:\Users\USER\Desktop\SmartCampusAPI\smart-campus-api\src\main\java\org\westminster\App.java
+C:\Users\USER\Desktop\SmartCampusAPI\smart-campus-api\src\main\java\lk\edu\westminster\smartcampus\exception\SensorUnavailableMapper.java
 C:\Users\USER\Desktop\SmartCampusAPI\smart-campus-api\src\main\java\lk\edu\westminster\smartcampus\exception\ErrorMessage.java
 C:\Users\USER\Desktop\SmartCampusAPI\smart-campus-api\src\main\java\lk\edu\westminster\smartcampus\model\Sensor.java
 C:\Users\USER\Desktop\SmartCampusAPI\smart-campus-api\src\main\java\lk\edu\westminster\smartcampus\resource\RoomResource.java
