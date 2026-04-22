@@ -6,19 +6,27 @@ import java.util.List;
 public class Room {
     private String id;
     private String name;
-    private List<Sensor> sensors = new ArrayList<>();
+    private int capacity; // Specification එකේ තිබෙන නිසා එකතු කරන්න
+    private List<String> sensorIds = new ArrayList<>(); // List<Sensor> වෙනුවට List<String> භාවිතා කරන්න
 
-    // need constructur and Getter, Setters
     public Room() {}
-    public Room(String id, String name) {
+
+    public Room(String id, String name, int capacity) {
         this.id = id;
         this.name = name;
+        this.capacity = capacity;
     }
 
+    // Getters and Setters
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
+    
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
-    public List<Sensor> getSensors() { return sensors; }
-    public void setSensors(List<Sensor> sensors) { this.sensors = sensors; }
+    
+    public int getCapacity() { return capacity; }
+    public void setCapacity(int capacity) { this.capacity = capacity; }
+    
+    public List<String> getSensorIds() { return sensorIds; }
+    public void setSensorIds(List<String> sensorIds) { this.sensorIds = sensorIds; }
 }
