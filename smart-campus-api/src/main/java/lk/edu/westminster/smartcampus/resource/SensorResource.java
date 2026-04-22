@@ -23,7 +23,6 @@ public class SensorResource {
     public List<Sensor> getSensors(@QueryParam("type") String type) {
         List<Sensor> allSensors = DataStore.getInstance().getSensors();
         
-        // type එකක් ලබා දී ඇත්නම්, එය පෙරීම (Filter) කරන්න
         if (type != null && !type.isEmpty()) {
             List<Sensor> filtered = new ArrayList<>();
             for (Sensor s : allSensors) {
@@ -39,7 +38,6 @@ public class SensorResource {
     // 2. POST - Room Validation සමඟ
     @POST
     public Response addSensor(Sensor sensor) {
-        // කාමරය තිබේදැයි පරීක්ෂා කිරීම (Validation)
         Room room = null;
         for (Room r : DataStore.getInstance().getRooms()) {
             if (r.getId().equalsIgnoreCase(sensor.getRoomId())) {
@@ -54,12 +52,25 @@ public class SensorResource {
                            .build();
         }
 
-        // කාමරය තිබේ නම් Sensor එක එකතු කරන්න
         DataStore.getInstance().getSensors().add(sensor);
-        
-        // Sensor එක Room එකටත් ලින්ක් කරන්න (ඔබේ අවශ්‍යතාවය අනුව)
         room.getSensorIds().add(sensor.getId());
         
         return Response.status(Response.Status.CREATED).entity(sensor).build();
+    }
+
+    // 3. Sub-resource locator (SensorReading සඳහා)
+    @Path("/{id}/readings")
+    public SensorReadingResource getReadings(@PathParam("id") String id) {
+        // Validation: ඇත්තටම මේ ID එකට අදාළ Sensor එකක් තියෙනවාද?
+        boolean exists = DataStore.getInstance().getSensors().stream()
+                .anyMatch(s -> s.getId().equalsIgnoreCase(id));
+
+        if (!exists) {
+            // Sensor එක නැත්නම් 404 Error එකක් දෙන්න
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+
+        // Sensor එක තියෙනවා නම්, එම ID එක සමඟ SensorReadingResource එකට යොමු කරන්න
+        return new SensorReadingResource(id);
     }
 }
