@@ -6,8 +6,8 @@ package lk.edu.westminster.smartcampus.resource;
 
 import lk.edu.westminster.smartcampus.model.Room;
 import lk.edu.westminster.smartcampus.repository.DataStore;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 
 @Path("/rooms")
