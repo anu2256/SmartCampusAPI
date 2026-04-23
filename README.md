@@ -1,4 +1,5 @@
-Smart Campus API
+Smart Campus API               
+
 Overview
 The Smart Campus API is a RESTful service developed to manage campus resources, specifically focusing on building/room management, 
 sensor monitoring, and data collection. The API allows administrators to track campus environmental data efficiently while ensuring data integrity through validation rules.
@@ -6,20 +7,14 @@ sensor monitoring, and data collection. The API allows administrators to track c
 Key Features:
 
 Room Management: Add and delete rooms.
-
 Sensor Management: Register sensors with specific types and associate them with rooms.
-
 Reading Logs: Capture sensor data readings while enforcing status-based restrictions (e.g., maintenance mode).
-
 Validation: Prevents invalid associations (e.g., adding sensors to non-existent rooms) and handles conflicts during resource deletion.
 
 Prerequisites
 Java Development Kit (JDK) 8 or higher
-
 NetBeans IDE
-
 GlassFish/Payara Server (or any JAX-RS compatible application server)
-
 Maven (for dependency management)
 
 How to Build and Launch
@@ -41,9 +36,7 @@ Select Clean and Build.
 Launch:
 
 Right-click the project and select Run.
-
 The application will deploy to your local server.
-
 The API base URL will be: http://localhost:8080/smart-campus-api/api/v1/
 
 Sample API Requests (cURL)
