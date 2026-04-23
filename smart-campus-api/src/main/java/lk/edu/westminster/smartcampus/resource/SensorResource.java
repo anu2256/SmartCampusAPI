@@ -40,13 +40,11 @@ public class SensorResource {
     @POST
     public Response addSensor(Sensor sensor) {
         
-        // 1. ID Generation Logic: අලුත් සෙන්සරයට ID එකක් නැත්නම් අලුත් එකක් ලබාදීම
         if (sensor.getId() == null || sensor.getId().isEmpty()) {
             int newId = DataStore.getInstance().getSensors().size() + 1;
             sensor.setId(String.valueOf(newId));
         }
 
-        // 2. Room Validation Logic: Room එක Database එකේ තියෙනවද බලන්න
         Room room = null;
         for (Room r : DataStore.getInstance().getRooms()) {
             if (r.getId().equalsIgnoreCase(sensor.getRoomId())) {
@@ -55,31 +53,52 @@ public class SensorResource {
             }
         }
 
-        // 3. Room එක නැත්නම් Custom Exception එකක් throw කරන්න
         if (room == null) {
             throw new LinkedResourceNotFoundException("Error: Room ID " + sensor.getRoomId() + " not found.");
         }
 
-        // 4. Data Store එකට එකතු කිරීම
         DataStore.getInstance().getSensors().add(sensor);
         room.getSensorIds().add(sensor.getId());
         
         return Response.status(Response.Status.CREATED).entity(sensor).build();
     }
 
-    // 3. Sub-resource locator (SensorReading සඳහා)
+    // 3. PUT - සෙන්සරයේ Status එක Update කිරීම (Maintenance Mode සඳහා)
+    @PUT
+    @Path("/{id}")
+    public Response updateSensorStatus(@PathParam("id") String id, Sensor updatedSensor) {
+        // සෙන්සරය හොයාගන්න
+        Sensor sensorToUpdate = null;
+        for (Sensor s : DataStore.getInstance().getSensors()) {
+            if (s.getId().equalsIgnoreCase(id)) {
+                sensorToUpdate = s;
+                break;
+            }
+        }
+
+        // සෙන්සරය නැත්නම් 404 Error එකක් දෙන්න
+        if (sensorToUpdate == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                           .entity("{\"error\": \"Sensor with ID " + id + " not found.\"}")
+                           .build();
+        }
+
+        // Status එක Update කරන්න
+        sensorToUpdate.setStatus(updatedSensor.getStatus());
+
+        return Response.status(Response.Status.OK).entity(sensorToUpdate).build();
+    }
+
+    // 4. Sub-resource locator (SensorReading සඳහා)
     @Path("/{id}/readings")
     public SensorReadingResource getReadings(@PathParam("id") String id) {
-        // Validation: ඇත්තටම මේ ID එකට අදාළ Sensor එකක් තියෙනවාද?
         boolean exists = DataStore.getInstance().getSensors().stream()
                 .anyMatch(s -> s.getId().equalsIgnoreCase(id));
 
         if (!exists) {
-            // Sensor එක නැත්නම් 404 දෝෂය පෙන්වන්න
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
 
         return new SensorReadingResource(id);
     }
 }
-
