@@ -7,7 +7,7 @@ package lk.edu.westminster.smartcampus.resource;
 import lk.edu.westminster.smartcampus.model.Sensor;
 import lk.edu.westminster.smartcampus.model.Room;
 import lk.edu.westminster.smartcampus.repository.DataStore;
-import lk.edu.westminster.smartcampus.exception.LinkedResourceNotFoundException; // මෙය අනිවාර්යයෙන්ම import කරන්න
+import lk.edu.westminster.smartcampus.exception.LinkedResourceNotFoundException;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -39,6 +39,14 @@ public class SensorResource {
     // 2. POST - Room Validation සහ Exception Handling සමඟ
     @POST
     public Response addSensor(Sensor sensor) {
+        
+        // 1. ID Generation Logic: අලුත් සෙන්සරයට ID එකක් නැත්නම් අලුත් එකක් ලබාදීම
+        if (sensor.getId() == null || sensor.getId().isEmpty()) {
+            int newId = DataStore.getInstance().getSensors().size() + 1;
+            sensor.setId(String.valueOf(newId));
+        }
+
+        // 2. Room Validation Logic: Room එක Database එකේ තියෙනවද බලන්න
         Room room = null;
         for (Room r : DataStore.getInstance().getRooms()) {
             if (r.getId().equalsIgnoreCase(sensor.getRoomId())) {
@@ -47,12 +55,12 @@ public class SensorResource {
             }
         }
 
-        // Room එක නැත්නම් අපි අපේ අලුත් Exception එක throw කරනවා
-        // මේකෙන් අර Mapper එක මගින් 422 JSON response එකක් යවනවා
+        // 3. Room එක නැත්නම් Custom Exception එකක් throw කරන්න
         if (room == null) {
             throw new LinkedResourceNotFoundException("Error: Room ID " + sensor.getRoomId() + " not found.");
         }
 
+        // 4. Data Store එකට එකතු කිරීම
         DataStore.getInstance().getSensors().add(sensor);
         room.getSensorIds().add(sensor.getId());
         
@@ -67,7 +75,7 @@ public class SensorResource {
                 .anyMatch(s -> s.getId().equalsIgnoreCase(id));
 
         if (!exists) {
-            // මෙතැනදීත් ඔබට අවශ්‍ය නම් 404 සඳහා Custom Exception එකක් හදලා throw කරන්න පුළුවන්
+            // Sensor එක නැත්නම් 404 දෝෂය පෙන්වන්න
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
 
