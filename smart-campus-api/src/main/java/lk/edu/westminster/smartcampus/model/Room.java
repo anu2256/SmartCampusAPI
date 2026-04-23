@@ -20,7 +20,7 @@ public class Room {
         this.floor = floor;
     }
 
-    // Getters and Setters (floor සඳහා අලුතින්)
+    // Getters and setters(floor සඳහා අලුතින්)
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
     
